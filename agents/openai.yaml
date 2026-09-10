@@ -1,0 +1,15 @@
+interface:
+  display_name: Professional Report Reviewer
+  short_description: Review report logic, evidence, insights, and language while preserving
+    valid analysis
+  default_prompt: Use $professional-report-reviewer to review this report, preserve
+    effective content, and recommend any material changes for confirmation.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true
