@@ -14,7 +14,7 @@ Give it an existing report. It checks facts, calculations, reasoning, evidence, 
 
 ## Quick start
 
-1. [Download the latest repository ZIP](https://github.com/madebyalicia/professional-report-reviewer/archive/refs/heads/main.zip).
+1. [Download the latest release](https://github.com/madebyalicia/professional-report-reviewer/releases/latest/download/professional-report-reviewer.zip).
 2. Add the extracted skill folder through your product's Skills interface or documented local skills directory. Keep the entire folder intact.
 3. Attach a small, non-confidential report and use this prompt:
 
