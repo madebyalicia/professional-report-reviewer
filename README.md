@@ -1,24 +1,45 @@
 # Professional Report Reviewer
 
+[![Tests](https://github.com/madebyalicia/professional-report-reviewer/actions/workflows/tests.yml/badge.svg)](https://github.com/madebyalicia/professional-report-reviewer/actions/workflows/tests.yml)
+![Version](https://img.shields.io/badge/version-0.1.0-2563EB)
+[![License: PolyForm Perimeter 1.0.1](https://img.shields.io/badge/license-PolyForm%20Perimeter%201.0.1-334155)](LICENSE)
+![Compatibility](https://img.shields.io/badge/compatible-ChatGPT%20Desktop%20%7C%20Codex%20%7C%20Claude%20%7C%20Qoder-0F766E)
+![Languages](https://img.shields.io/badge/review%20languages-English%20%7C%20Chinese-7C3AED)
+
 > Make sure the report holds up before someone acts on it.
 
 Professional Report Reviewer is an Agent Skill for consultants, researchers, analysts, strategists, and other professionals whose work is reviewed repeatedly before it goes to clients, executives, boards, investment committees, or internal decision-makers.
 
 Give it an existing report. It checks facts, calculations, reasoning, evidence, comparisons, synthesis, recommendations, structure, and professional language. It can diagnose problems, run focused comparisons, or revise approved issues while preserving the analysis that already works.
 
-## Why this skill
+## Quick start
 
-A polished report can still fail under scrutiny. Accurate facts may lead to an unsupported conclusion. A competitor section may contain good research but compare companies on different bases. A recommendation may sound sensible while solving a problem the report never established.
+1. [Download the latest repository ZIP](https://github.com/madebyalicia/professional-report-reviewer/archive/refs/heads/main.zip).
+2. Add the extracted skill folder through your product's Skills interface or documented local skills directory. Keep the entire folder intact.
+3. Attach a small, non-confidential report and use this prompt:
 
-A generic review prompt may also rewrite too early, flatten the report's structure, remove useful examples or qualifications, and turn a complete report into an outline or review memo.
+```text
+Use Professional Report Reviewer to review this report.
+Start with the material issues and give a clear verdict on each one.
+Tell me what holds, what does not, why, and what conclusion the evidence supports.
+Do not change meaning, scope, structure, or recommendations before I approve the proposed changes.
+```
 
-This skill treats the report as a professional work product that already contains research and judgment. It tests whether the report holds together before it changes the writing.
+Platform-specific installation and invocation instructions are listed under [Compatible environments](#compatible-environments).
 
-## How it differs from a one-shot AI review
+If your environment supports installation from repository URLs, you can instead paste this repository's URL and ask: `Install the Professional Report Reviewer skill from this GitHub repository.`
 
-The first column describes common behavior from a generic prompt such as “review and improve this report.” Models and tools vary.
+## Why not just ask ChatGPT or another AI model?
 
-| | Typical one-shot AI review | Professional Report Reviewer |
+ChatGPT, Claude, and Qoder provide the underlying model. This Skill provides a disciplined review process. It does not claim to replace or outperform the base model; it changes how that model approaches professional review.
+
+> A general model can improve the writing. With this Skill, it first tests whether the report deserves its conclusions.
+
+A polished report can still contain a wrong calculation, an unsupported conclusion, an invalid comparison, or a recommendation that does not address the diagnosed problem. A generic rewrite may make those problems sound more convincing. This Skill treats the report as existing professional work: it tests the substance first and preserves the analysis that already works.
+
+The first column describes behavior that can occur with a generic prompt such as “review and improve this report.” Actual behavior varies by model, prompt, and tool access.
+
+| | Direct prompt to ChatGPT, Claude, or another model | With Professional Report Reviewer |
 | --- | --- | --- |
 | Main job | Improve fluency and presentation | Test whether the facts, reasoning, comparisons, and recommendations hold |
 | Sequence | May rewrite immediately | Diagnoses material issues before substantive revision |
@@ -30,28 +51,54 @@ The first column describes common behavior from a generic prompt such as “revi
 | Deletions | May remove content in the name of concision | Requires approval for each substantive deletion |
 | Valid outcome | Usually produces edits | Can conclude that a passage or the full report needs no change |
 
+## Worked example: when polished wording hides weak reasoning
+
+> **Fictionalized but realistic:** The company and figures below are invented. The case represents common numerical and reasoning failures in professional reports; it is not client work or a claimed customer result.
+
+### Before: report excerpt
+
+> Revenue increased from 80 to 100, a 20% increase. Advertising spend rose from 10 to 20, and revenue also increased, so advertising efficiency improved. We should increase next year's advertising budget.
+
+### A surface-level rewrite
+
+> Revenue grew by 20% as advertising investment increased, demonstrating improved efficiency and supporting a larger budget next year.
+
+The language is smoother, but the calculation, efficiency claim, causal leap, and recommendation remain wrong or unsupported.
+
+### Review verdict
+
+| Check | Professional verdict |
+| --- | --- |
+| Revenue growth | **Incorrect:** growth from 80 to 100 is 25%, not 20% |
+| Advertising efficiency | **Contradicted by the figures:** revenue per unit of advertising spend fell from 8 to 5, a 37.5% decline |
+| Causation | **Unsupported:** simultaneous increases do not show that advertising caused the additional revenue |
+| Recommendation | **Do not adopt on current evidence:** a larger budget requires channel-level incremental return or comparable evidence |
+
+### After: revision once approved
+
+> Revenue increased from 80 to 100, a 25% increase, while advertising spend doubled from 10 to 20. Revenue per unit of advertising spend therefore fell from 8 to 5. The available figures do not establish how much of the revenue increase was caused by advertising. A broader budget increase should wait until channel-level incremental returns are assessed.
+
+The important difference is not extra caution. It is a corrected calculation, a tested inference, a decision-ready verdict, and a revision that preserves the facts that still hold.
+
+## Review workflow
+
+![Professional Report Reviewer workflow](assets/workflow.svg)
+
+The workflow scales with the task. A focused language edit does not need a full review package. A sound report can pass without unnecessary rewriting.
+
 ## What it reviews
 
 | Area | What it checks |
 | --- | --- |
-| Facts and numbers | Public facts, dates, definitions, data scope, calculations, textual errors, and consistency across the report |
+| Facts and numbers | Public facts, dates, definitions, data scope, units, denominators, calculations, textual errors, and consistency across the report |
 | Logic | Whether conclusions follow from the premises, including causal leaps, contradictions, and unsupported generalization |
-| Evidence | Whether reported facts, grounded inferences, working hypotheses, and unsupported assertions receive the right treatment |
-| Comparisons | Whether companies, cases, products, and data are compared on a consistent and decision-relevant basis |
+| Evidence | Whether claims are supported by supplied sources or relevant public facts, and whether reported facts, grounded inferences, working hypotheses, and unsupported assertions receive the right treatment |
+| Comparisons | Whether companies, cases, products, and data are compared on shared, decision-relevant criteria without mixing product, supplier, or infrastructure levels |
 | Analysis | Whether the material produces a finding, mechanism, boundary, tradeoff, or useful judgment |
 | Recommendations | Whether each recommendation addresses the diagnosed problem and fits the objective, resources, economics, and timing |
 | Structure and narrative | Whether sections serve the main argument and each part moves the report forward |
+| Consistency and revisions | Whether definitions, assumptions, conclusions, or recommendations conflict across sections, and whether a revised draft lost claims, evidence, examples, or qualifications |
 | Professional language | Whether the writing is clear, precise, natural, and free of generic filler or awkward translated phrasing |
-
-## Comparison work it can handle
-
-| Comparison task | What the reviewer does |
-| --- | --- |
-| Companies, products, or cases | Applies shared criteria, separates product, supplier, and infrastructure levels where relevant, and explains which differences matter to the decision |
-| Data and metrics | Checks definitions, time periods, scope, units, denominators, and whether the figures are genuinely comparable |
-| Claims against sources | Traces each consequential claim to supplied evidence or relevant public facts and checks whether the wording exceeds the support |
-| Sections within one report | Finds inconsistent definitions, classifications, assumptions, conclusions, or recommendations |
-| Original and revised drafts | Detects lost claims, examples, qualifications, recommendations, and unapproved deletions |
 
 ## Who it is for
 
@@ -82,43 +129,13 @@ The core skill follows the `SKILL.md` Agent Skills format. Compatibility below m
 | [ChatGPT desktop and Codex](https://developers.openai.com/codex/skills/) | Native Agent Skills format; this package also includes `agents/openai.yaml` | Add the standalone skill in ChatGPT desktop and invoke it with `@professional-report-reviewer`. In Codex, install it as a local skill and use `$professional-report-reviewer` or `/skills`. |
 | [Claude.ai](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview) | Compatible custom Skill format | Upload the skill folder as a ZIP through the custom Skills settings. Availability depends on the Claude plan and code-execution access. |
 | [Claude Code](https://code.claude.com/docs/en/skills) | Compatible filesystem-based Skill | Copy the folder to `~/.claude/skills/professional-report-reviewer/` or `.claude/skills/professional-report-reviewer/`, then use `/professional-report-reviewer` or ask naturally. |
-| [Qoder IDE and CLI](https://docs.qoder.com/extensions/skills) | Compatible `SKILL.md` Skill | Install from GitHub with Qoder's Skills CLI or copy the folder to `~/.qoder/skills/professional-report-reviewer/`. Invoke it with `/professional-report-reviewer` or ask naturally. |
-| [QoderWork](https://docs.qoder.com/qoderwork/skills) | Compatible uploaded or filesystem Skill | Paste the GitHub repository link and ask QoderWork to install it, upload the package, or place it in `~/.qoderwork/skills/`. |
+| [Qoder IDE and CLI](https://docs.qoder.com/extensions/skills) | Compatible `SKILL.md` Skill | Install from GitHub with the Skills CLI or copy the folder to `~/.qoder/skills/professional-report-reviewer/`. Invoke it with `/professional-report-reviewer` or ask naturally. |
+| [QoderWork](https://docs.qoder.com/qoderwork/skills) | Compatible uploaded or filesystem Skill | Paste the GitHub repository link and ask QoderWork to install it, upload `SKILL.md` with its supporting files through the Skills page, or place the folder in `~/.qoderwork/skills/`. |
 | Other agents that read `SKILL.md` | Expected to work at the instruction level | Point the agent to `SKILL.md`. File access, web verification, scripts, and invocation syntax depend on the host. |
 
-The current regression suite covers skill behavior. Cross-platform results still vary by model, product surface, and host permissions.
-
-## Install
-
-### Ask your agent
-
-Copy this repository's URL and tell a compatible agent:
-
-```text
-Install the Professional Report Reviewer skill from this GitHub repository.
-```
-
-### Install manually
-
-1. Download the repository ZIP.
-2. Keep `SKILL.md`, `references/`, `scripts/`, `tests/`, and `agents/` together in one `professional-report-reviewer` folder.
-3. Add that folder through your product's Skills interface or place it in the documented local skills directory.
-4. Start with a small, non-confidential report and confirm that the skill appears in the product's skill list.
-
-This project does not require a separate website or document-upload service.
-
-## Use it
+## More ways to use it
 
 Attach the complete report and ask in plain language. Invocation syntax varies by product.
-
-### Full report review
-
-```text
-Use Professional Report Reviewer to review this report.
-Start with a diagnosis and a located list of material issues.
-For each issue, tell me what holds, what does not, why, and what conclusion the evidence supports.
-Do not change the central argument, restructure the report, or delete substantive content before I approve the proposed changes.
-```
 
 ### Competitor or case comparison
 
@@ -144,12 +161,6 @@ Keep the claims, conclusions, structure, examples, and all substantive content.
 Remove awkward translated phrasing and make the language natural and professional.
 Flag factual or logical problems separately.
 ```
-
-## Review workflow
-
-`Diagnosis → Located issues → Professional verdicts → Approval of material changes → Revision → Final verification`
-
-The workflow scales with the task. A focused language edit does not need a full review package. A sound report can pass without unnecessary rewriting.
 
 ## Editing boundaries
 
@@ -177,10 +188,12 @@ The final revision is checked against the source for meaning, scope, evidence, e
 | `scripts/` | Deterministic checks for selected clean-draft issues |
 | `tests/` | Behavioral cases used to test the review rules |
 | `agents/openai.yaml` | Optional display metadata for ChatGPT and Codex |
+| `assets/` | Repository and interface visuals, including the workflow diagram and skill icon |
+| `VERSION` | Current public version number |
 
 ## Project status
 
-This is the first public release of Professional Report Reviewer. Its rules are based on recurring failures in professional report review and are supported by deterministic checks and behavioral regression cases.
+Version 0.1.0 is the first public version of Professional Report Reviewer. Its rules are informed by recurring failures in professional report review. The repository includes deterministic checks and behavioral regression fixtures, but these do not establish production reliability or universal cross-platform performance.
 
 Results vary by model, context length, file-handling support, tool access, and subject matter. Keep a qualified human reviewer in the loop when a report will influence an important external or internal decision.
 
@@ -207,7 +220,7 @@ When possible, include an anonymized source passage, the actual review output, a
 
 Licensed under the [PolyForm Perimeter License 1.0.1](https://polyformproject.org/licenses/perimeter/1.0.1).
 
-You may use, modify, and share the project for permitted purposes, including personal work, internal company work, and paid professional work. You may not use it to provide others with a product that competes with this software. The project is source-available and does not use the MIT License. See `LICENSE` for the exact terms.
+You may use, modify, and share the project for permitted purposes, including personal work, internal company work, and paid professional work, provided that you do not use it to offer others a product that competes with this software. When distributing copies, you must also provide the license terms or the license URL and preserve any required notices. The project is source-available and is not licensed under MIT. See `LICENSE` for the exact terms.
 
 ## Maintainer
 
