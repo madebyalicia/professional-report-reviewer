@@ -180,7 +180,7 @@ The final revision is checked against the source for meaning, scope, evidence, e
 
 ## Project status
 
-This project is in beta. Its rules come from recurring failures in professional report review and are backed by deterministic checks and behavioral regression cases.
+This is the first public release of Professional Report Reviewer. Its rules are based on recurring failures in professional report review and are supported by deterministic checks and behavioral regression cases.
 
 Results vary by model, context length, file-handling support, tool access, and subject matter. Keep a qualified human reviewer in the loop when a report will influence an important external or internal decision.
 
