@@ -31,9 +31,9 @@ If your environment supports installation from repository URLs, you can instead 
 
 ## Why not just ask ChatGPT or another AI model?
 
-ChatGPT, Claude, and Qoder provide the underlying model. This Skill provides a disciplined review process. It does not claim to replace or outperform the base model; it changes how that model approaches professional review.
+Professional Report Reviewer runs inside ChatGPT, Claude, Qoder, and other compatible agents. It does not replace or outperform their models; it gives the selected model a disciplined review process.
 
-> A general model can improve the writing. With this Skill, it first tests whether the report deserves its conclusions.
+> The model provides the intelligence. This Skill provides the review discipline.
 
 A polished report can still contain a wrong calculation, an unsupported conclusion, an invalid comparison, or a recommendation that does not address the diagnosed problem. A generic rewrite may make those problems sound more convincing. This Skill treats the report as existing professional work: it tests the substance first and preserves the analysis that already works.
 
@@ -51,7 +51,7 @@ The first column describes behavior that can occur with a generic prompt such as
 | Deletions | May remove content in the name of concision | Requires approval for each substantive deletion |
 | Valid outcome | Usually produces edits | Can conclude that a passage or the full report needs no change |
 
-## Worked example: when polished wording hides weak reasoning
+## Worked examples: what a surface-level review misses
 
 > **Fictionalized but realistic:** The company and figures below are invented. The case represents common numerical and reasoning failures in professional reports; it is not client work or a claimed customer result.
 
@@ -80,6 +80,20 @@ The language is smoother, but the calculation, efficiency claim, causal leap, an
 
 The important difference is not extra caution. It is a corrected calculation, a tested inference, a decision-ready verdict, and a revision that preserves the facts that still hold.
 
+### A second pattern: incomparable competitor evidence
+
+This example is also fictional.
+
+| | Company A | Company B |
+| --- | --- | --- |
+| Reported metric | ARR (annual recurring revenue) | Total revenue |
+| Reported scale | $100M | $500M |
+| Reported YoY growth | +80% | +30% |
+
+> **Original conclusion:** Company A is clearly the market leader because it is growing faster than Company B.
+
+**Review verdict:** Company A reports faster growth on a different metric. ARR and total revenue do not provide a shared basis, and growth rate alone does not establish market leadership. The evidence supports faster growth in A's reported ARR—not a leadership verdict. Compare both companies on the same metric, period, and scope before ranking them.
+
 ## Review workflow
 
 ![Professional Report Reviewer workflow](assets/workflow.svg)
@@ -100,18 +114,14 @@ The workflow scales with the task. A focused language edit does not need a full 
 | Consistency and revisions | Whether definitions, assumptions, conclusions, or recommendations conflict across sections, and whether a revised draft lost claims, evidence, examples, or qualifications |
 | Professional language | Whether the writing is clear, precise, natural, and free of generic filler or awkward translated phrasing |
 
-## Who it is for
+## Who it is for and language support
 
 Use it when a report must survive several rounds of review before external delivery or internal use. Typical users include:
 
 - Consultants and advisory teams
 - Market, industry, and policy researchers
 - Strategy, corporate planning, and competitive-intelligence teams
-- Investment, business, and financial analysts
-- Professionals preparing management, board, or executive reports
-- Anyone checking a revised report before it informs a decision
-
-## Language support
+- Investment, business, and financial analysts preparing management, board, or executive reports
 
 | Report language | Review coverage |
 | --- | --- |
@@ -135,48 +145,24 @@ The core skill follows the `SKILL.md` Agent Skills format. Compatibility below m
 
 ## More ways to use it
 
-Attach the complete report and ask in plain language. Invocation syntax varies by product.
+Attach the complete report and ask in plain language. For example:
 
-### Competitor or case comparison
-
-```text
-Use Professional Report Reviewer to examine the comparison in this report.
-Put the companies and cases on a common, decision-relevant basis.
-Identify incomparable evidence, explain the differences that matter, and give a clear verdict.
-```
-
-### Compare two drafts
-
-```text
-Use Professional Report Reviewer to compare the original and revised reports.
-Find any lost claims, facts, examples, qualifications, recommendations, or changes in certainty and scope.
-Do not rewrite either version.
-```
-
-### Chinese language review
-
-```text
-Use Professional Report Reviewer to edit the Chinese in this report.
-Keep the claims, conclusions, structure, examples, and all substantive content.
-Remove awkward translated phrasing and make the language natural and professional.
-Flag factual or logical problems separately.
-```
+- **Competitor or case comparison:** `Put the companies or cases on a common, decision-relevant basis. Identify incomparable evidence and give a clear verdict.`
+- **Compare two drafts:** `Find lost claims, facts, examples, qualifications, recommendations, or changes in certainty and scope. Do not rewrite either version.`
+- **Chinese language review:** `Make the Chinese natural and professional while preserving all meaning and structure. Flag factual or logical problems separately.`
 
 ## Editing boundaries
 
 Language and formatting edits can be applied directly when they preserve meaning. Changes to claims, certainty, scope, recommendations, taxonomy, or structure require confirmation.
 
-Every proposed deletion of substantive content must identify:
-
-- The exact location
-- What would disappear
-- Why removal is recommended
-- What the report would lose or gain
-- A less destructive alternative, when one exists
+Every proposed deletion of substantive content must identify the exact location, what would disappear, why removal is recommended, the tradeoff, and a less-destructive alternative when one exists.
 
 The final revision is checked against the source for meaning, scope, evidence, examples, recommendations, continuity, and numbering.
 
-## Repository structure
+<details>
+<summary><strong>Repository structure</strong></summary>
+
+<br>
 
 | Path | Purpose |
 | --- | --- |
@@ -191,6 +177,8 @@ The final revision is checked against the source for meaning, scope, evidence, e
 | `assets/` | Repository and interface visuals, including the workflow diagram and skill icon |
 | `VERSION` | Current public version number |
 
+</details>
+
 ## Project status
 
 Version 0.1.0 is the first public version of Professional Report Reviewer. Its rules are informed by recurring failures in professional report review. The repository includes deterministic checks and behavioral regression fixtures, but these do not establish production reliability or universal cross-platform performance.
@@ -203,7 +191,10 @@ This project does not run an independent document-upload service. Your report is
 
 Do not post confidential reports, client names, unpublished data, or personal information in public issues. A short, anonymized example is usually enough to reproduce a problem.
 
-## Feedback
+<details>
+<summary><strong>How to report a useful issue</strong></summary>
+
+<br>
 
 Useful issue reports include:
 
@@ -215,6 +206,8 @@ Useful issue reports include:
 - The same case produced materially different behavior across models
 
 When possible, include an anonymized source passage, the actual review output, and the result you expected.
+
+</details>
 
 ## License
 
