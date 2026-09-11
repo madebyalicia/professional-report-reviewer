@@ -211,4 +211,4 @@ You may use, modify, and share the project for permitted purposes, including per
 
 ## Maintainer
 
-Created and maintained by [AliciaLiu0526](https://github.com/AliciaLiu0526).
+Created and maintained by [madebyalicia](https://github.com/madebyalicia).
